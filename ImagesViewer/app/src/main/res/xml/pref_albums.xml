@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditTextPreference
+        android:defaultValue="@string/pref_seconds_to_change_image_automatically_default"
+        android:inputType="number"
+        android:key="@string/pref_seconds_to_change_image_automatically_key"
+        android:singleLine="true"
+        android:title="@string/pref_seconds_to_change_image_automatically_label" />
+    <CheckBoxPreference
+        android:defaultValue="@bool/restart_viewer_automatically_by_default"
+        android:key="@string/pref_restart_viewer_automatically_key"
+        android:summaryOff="@string/pref_summary_off"
+        android:summaryOn="@string/pref_summary_on"
+        android:title="@string/pref_restart_viewer_automatically_label" />
+    <CheckBoxPreference
+        android:defaultValue="@bool/enable_automatic_viewer_by_default"
+        android:key="@string/pref_enable_automatic_viewer_key"
+        android:summaryOff="@string/pref_summary_off"
+        android:summaryOn="@string/pref_summary_on"
+        android:title="@string/pref_enable_automatic_viewer_label" />
+</PreferenceScreen>

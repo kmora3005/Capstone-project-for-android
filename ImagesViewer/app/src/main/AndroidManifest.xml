@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.imagesviewer">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
+        <activity android:name=".ui.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.UserAlbumsActivity"
+            android:label="@string/title_user_albums_activity"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.AlbumEditionActivity"
+            android:parentActivityName=".ui.UserAlbumsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.UserAlbumsActivity" />
+        </activity>
+        <activity
+            android:name=".ui.AlbumDetailActivity"
+            android:parentActivityName=".ui.UserAlbumsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.UserAlbumsActivity" />
+        </activity>
+        <activity
+            android:name=".ui.ImageViewerActivity"
+            android:parentActivityName=".ui.AlbumDetailActivity"
+            android:theme="@style/NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.AlbumDetailActivity" />
+        </activity>
+
+        <receiver android:name=".widget.AlbumAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/album_app_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".widget.AlbumsGridWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service android:name=".widget.AlbumsIntentService" />
+
+        <activity android:name=".ui.SettingsActivity" />
+    </application>
+
+</manifest>

@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Images Viewer</string>
+    <!-- facebook -->
+    <string name="facebook_application_id" translatable="false">YOUR_KEY_HERE</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">YOUR_KEY_HERE</string>
+    <!-- twitter -->
+    <string name="twitter_consumer_key" translatable="false">YOUR_KEY_HERE</string>
+    <string name="twitter_consumer_secret" translatable="false">YOUR_KEY_HERE</string>
+    <!-- Custom Search API -->
+    <string name="google_custom_search_api_key" translatable="false">YOUR_KEY_HERE</string>
+    <string name="google_custom_search_api_cx" translatable="false">YOUR_KEY_HERE</string>
+
+    <!-- Validations -->
+    <string name="sign_in_cancelled">Sign in cancelled</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="unknown_sign_in_response">Unknown sign in response</string>
+    <string name="search_hint">Search something</string>
+    <string name="empty_title">Title can\'t be empty</string>
+    <string name="no_image_selected">None image has been selected</string>
+
+    <!-- Titles -->
+    <string name="title_user_albums_activity">My albums</string>
+    <string name="title_album_new_activity">New album</string>
+    <string name="title_album_edition_activity">Add more images</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Hints and common UI -->
+    <string name="thumbnail_description">Thumbnail</string>
+    <string name="title_hint">Title</string>
+    <string name="more">More</string>
+    <string name="save">Save</string>
+    <string name="next">Next</string>
+    <string name="remove_item">Remove item</string>
+    <string name="logo">Logo</string>
+    <string name="fullscreen_image">Fullscreen image</string>
+
+    <!-- Strings related to widget -->
+    <string name="appwidget_text">My albums</string>
+    <string name="empty_view_text">No albums yet!</string>
+    <string name="album_name">Album name</string>
+
+    <!-- Strings related to Settings -->
+    <string name="pref_seconds_to_change_image_automatically_default">5</string>
+    <string name="pref_seconds_to_change_image_automatically_key">seconds_to_change_image_automatically_key</string>
+    <string name="pref_seconds_to_change_image_automatically_label">Seconds to change image automatically</string>
+    <string name="pref_restart_viewer_automatically_key">restart_viewer_automatically_key</string>
+    <string name="pref_summary_off">Not enabled</string>
+    <string name="pref_summary_on">Enabled</string>
+    <string name="pref_restart_viewer_automatically_label">Restart viewer automatically</string>
+    <string name="pref_enable_automatic_viewer_key">enable_automatic_viewer_key</string>
+    <string name="pref_enable_automatic_viewer_label">Enable automatic viewer</string>
+    <string name="action_settings">Settings</string>
+</resources>
