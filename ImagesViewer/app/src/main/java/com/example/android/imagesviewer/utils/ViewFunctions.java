@@ -9,9 +9,9 @@ import android.util.DisplayMetrics;
  */
 
 public class ViewFunctions {
-    public static int numberOfColumns(Context context){
+    public static int numberOfColumns(Context context) {
         DisplayMetrics dm = context.getResources().getDisplayMetrics();
         float screenWidth = dm.widthPixels / dm.density;
-        return screenWidth>=600 ? 3:2;
+        return screenWidth >= 600 ? 3 : 2;
     }
 }

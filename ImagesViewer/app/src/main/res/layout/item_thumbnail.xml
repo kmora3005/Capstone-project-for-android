@@ -4,37 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/iv_thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
-        tools:layout_width="200dp"
+        android:contentDescription="@string/thumbnail_description"
         tools:layout_height="200dp"
-        android:contentDescription="@string/thumbnail_description" />
+        tools:layout_width="200dp" />
+
     <ImageView
         android:id="@+id/iv_remove"
-        app:srcCompat="@drawable/ic_highlight_off_black_24dp"
-        android:visibility="gone"
-        tools:visibility="visible"
         android:layout_width="@dimen/remove_icon_size"
         android:layout_height="@dimen/remove_icon_size"
-        android:layout_alignRight="@+id/iv_thumbnail"
         android:layout_alignEnd="@+id/iv_thumbnail"
+        android:layout_alignRight="@+id/iv_thumbnail"
         android:layout_alignTop="@+id/iv_thumbnail"
-        android:contentDescription="@string/remove_item"/>
+        android:contentDescription="@string/remove_item"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_highlight_off_black_24dp"
+        tools:visibility="visible" />
+
     <ImageView
         android:id="@+id/iv_check"
-        app:srcCompat="@drawable/ic_check_circle_black_24dp"
-        android:visibility="gone"
-        tools:visibility="visible"
         android:layout_width="@dimen/selected_icon_size"
         android:layout_height="@dimen/selected_icon_size"
-        android:layout_alignRight="@+id/iv_thumbnail"
         android:layout_alignEnd="@+id/iv_thumbnail"
+        android:layout_alignRight="@+id/iv_thumbnail"
         android:layout_alignTop="@+id/iv_thumbnail"
-        android:contentDescription="@string/remove_item"/>
+        android:contentDescription="@string/remove_item"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_check_circle_black_24dp"
+        tools:visibility="visible" />
+
     <ProgressBar
         android:id="@+id/pb_loading_image"
         android:layout_width="@dimen/progressbar_size"

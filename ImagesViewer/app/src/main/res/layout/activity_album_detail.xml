@@ -20,8 +20,8 @@
         android:onClick="onClickSave"
         android:text="@string/save"
         android:visibility="gone"
-        tools:visibility="visible"
-/>
+        tools:visibility="visible" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_edit_album"
         android:layout_width="wrap_content"
@@ -29,9 +29,9 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_layout_margin"
         android:onClick="onClickEditAlbum"
-        app:srcCompat="@drawable/ic_add_black_24dp"
-        app:elevation="@dimen/fab_elevation"
         android:visibility="gone"
-        tools:visibility="visible"
-        />
+        android:contentDescription="@string/edit_album"
+        app:elevation="@dimen/fab_elevation"
+        app:srcCompat="@drawable/ic_add_black_24dp"
+        tools:visibility="visible" />
 </merge>

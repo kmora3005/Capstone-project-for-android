@@ -24,13 +24,13 @@ import java.util.Iterator;
 public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdapter.AlbumViewHolder> {
     private final Context mContext;
     private final AlbumAdapterOnClickHandler mClickHandler;
-    private ArrayList<Album> albums=new ArrayList<>();
+    private ArrayList<Album> albums = new ArrayList<>();
 
     public AlbumRecyclerAdapter(Context context, AlbumAdapterOnClickHandler clickHandler) {
 
         mContext = context;
-        mClickHandler=clickHandler;
-        albums=new ArrayList<>();
+        mClickHandler = clickHandler;
+        albums = new ArrayList<>();
     }
 
     /*@Override
@@ -51,18 +51,18 @@ public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdap
 
     @Override
     public void onBindViewHolder(AlbumViewHolder holder, int position) {
-        Album album=albums.get(position);
-        String mThumbnailUrl= album.images.get(0).url;
+        Album album = albums.get(position);
+        String mThumbnailUrl = album.images.get(0).url;
         if (holder.ivThumbnailAlbum != null) {
             Picasso.with(mContext).load(mThumbnailUrl).placeholder(R.drawable.ic_photo_black_24dp)
-                    .into(holder.ivThumbnailAlbum,  new ImageLoadedCallback(holder.pbLoadingImage) {
-                @Override
-                public void onSuccess() {
-                    if (this.progressBar != null) {
-                        this.progressBar.setVisibility(View.GONE);
-                    }
-                }
-            });
+                    .into(holder.ivThumbnailAlbum, new ImageLoadedCallback(holder.pbLoadingImage) {
+                        @Override
+                        public void onSuccess() {
+                            if (this.progressBar != null) {
+                                this.progressBar.setVisibility(View.GONE);
+                            }
+                        }
+                    });
         }
     }
 
@@ -78,11 +78,9 @@ public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdap
 
     public void removeAlbum(Album album) {
         Iterator<Album> iterator = this.albums.iterator();
-        while(iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             Album albumToCompare = iterator.next();
-            if (album.key.equals(albumToCompare.key))
-            {
+            if (album.key.equals(albumToCompare.key)) {
                 iterator.remove();
                 break;
             }
@@ -92,10 +90,11 @@ public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdap
 
     public interface AlbumAdapterOnClickHandler {
         void onClickAlbum(Album album);
+
         void onClickRemoveAlbum(Album album);
     }
 
-    class AlbumViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
+    class AlbumViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         public final ImageView ivThumbnailAlbum;
         public final ImageView ivRemoveIcon;
         public final ProgressBar pbLoadingImage;
@@ -104,7 +103,7 @@ public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdap
             super(itemView);
             ivThumbnailAlbum = itemView.findViewById(R.id.iv_thumbnail);
             ivRemoveIcon = itemView.findViewById(R.id.iv_remove);
-            pbLoadingImage= itemView.findViewById(R.id.pb_loading_image);
+            pbLoadingImage = itemView.findViewById(R.id.pb_loading_image);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -113,7 +112,7 @@ public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdap
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
-            Album album=albums.get(position);
+            Album album = albums.get(position);
 
             ivRemoveIcon.setVisibility(View.INVISIBLE);
             mClickHandler.onClickAlbum(album);
@@ -122,7 +121,7 @@ public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdap
         @Override
         public boolean onLongClick(View view) {
             int position = getAdapterPosition();
-            final Album album=albums.get(position);
+            final Album album = albums.get(position);
 
             ivRemoveIcon.setVisibility(View.VISIBLE);
             ivRemoveIcon.setOnClickListener(new View.OnClickListener() {

@@ -9,20 +9,6 @@ import android.os.Parcelable;
  */
 
 public class AlbumImage implements Parcelable {
-    public String url;
-
-    public AlbumImage(){
-
-    }
-
-    public AlbumImage(String url){
-        this.url=url;
-    }
-
-    protected AlbumImage(Parcel in) {
-        url = in.readString();
-    }
-
     public static final Creator<AlbumImage> CREATOR = new Creator<AlbumImage>() {
         @Override
         public AlbumImage createFromParcel(Parcel in) {
@@ -34,6 +20,19 @@ public class AlbumImage implements Parcelable {
             return new AlbumImage[size];
         }
     };
+    public String url;
+
+    public AlbumImage() {
+
+    }
+
+    public AlbumImage(String url) {
+        this.url = url;
+    }
+
+    protected AlbumImage(Parcel in) {
+        url = in.readString();
+    }
 
     @Override
     public int describeContents() {

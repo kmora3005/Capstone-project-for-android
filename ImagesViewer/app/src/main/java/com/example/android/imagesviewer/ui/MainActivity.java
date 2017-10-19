@@ -1,10 +1,10 @@
 package com.example.android.imagesviewer.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.example.android.imagesviewer.R;
 import com.firebase.ui.auth.AuthUI;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         if (auth.getCurrentUser() != null) {
             // already signed in
-            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN,new Bundle());
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, new Bundle());
             startActivity(new Intent(this, UserAlbumsActivity.class));
         } else {
             // not signed in
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN,new Bundle());
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, new Bundle());
                 startActivity(new Intent(this, UserAlbumsActivity.class));
                 finish();
                 return;

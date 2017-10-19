@@ -2,12 +2,13 @@ package com.example.android.imagesviewer.ui;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,12 +45,11 @@ public class AlbumDetailActivity extends AppCompatActivity implements ThumbnailR
         FloatingActionButton fabEdit = findViewById(R.id.fab_edit_album);
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
+        if (bundle != null) {
             Boolean isNewAlbum = bundle.getBoolean(IS_NEW_ALBUM_KEY);
-            if (isNewAlbum){
+            if (isNewAlbum) {
                 btnSave.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 fabEdit.setVisibility(View.VISIBLE);
             }
 
@@ -59,9 +59,9 @@ public class AlbumDetailActivity extends AppCompatActivity implements ThumbnailR
             assert actionBar != null;
             actionBar.setTitle(mAlbum.title);
 
-            int numColumns=numberOfColumns(this);
-            GridLayoutManager layoutManager= new GridLayoutManager(this, numColumns);
-            mThumbnailRecyclerAdapter = new ThumbnailRecyclerAdapter(this, this,mAlbum.getUrls());
+            int numColumns = numberOfColumns(this);
+            StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(numColumns, StaggeredGridLayoutManager.VERTICAL);
+            mThumbnailRecyclerAdapter = new ThumbnailRecyclerAdapter(this, this, mAlbum.getUrls());
             rvImages.setAdapter(mThumbnailRecyclerAdapter);
             rvImages.setLayoutManager(layoutManager);
 
@@ -72,16 +72,15 @@ public class AlbumDetailActivity extends AppCompatActivity implements ThumbnailR
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         String title = actionBar.getTitle().toString();
-        Album album = mThumbnailRecyclerAdapter.getAlbumObject(title,"");
-        Boolean isNew = TextUtils.isEmpty(mAlbum !=null?mAlbum.key:"");
+        Album album = mThumbnailRecyclerAdapter.getAlbumObject(title, "");
+        Boolean isNew = TextUtils.isEmpty(mAlbum != null ? mAlbum.key : "");
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user!=null) {
+        if (user != null) {
             DatabaseReference reference = FirebaseInstance.getDatabase().getReference(ALBUMS_DATABASE_REFERENCE_KEY);
-            if (isNew){
+            if (isNew) {
                 reference.child(user.getUid()).push().setValue(album);
-            }
-            else {
+            } else {
                 reference.child(user.getUid()).child(mAlbum.key).setValue(album);
             }
         }
@@ -92,7 +91,7 @@ public class AlbumDetailActivity extends AppCompatActivity implements ThumbnailR
     public void onClickEditAlbum(View view) {
         Intent intent = new Intent(this, AlbumEditionActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ALBUM_KEY,mAlbum);
+        bundle.putParcelable(ALBUM_KEY, mAlbum);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -101,27 +100,27 @@ public class AlbumDetailActivity extends AppCompatActivity implements ThumbnailR
     public void onClickPicture(int position) {
         Intent intent = new Intent(AlbumDetailActivity.this, ImageViewerActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ALBUM_KEY,mAlbum);
-        bundle.putInt(INDEX_SELECTED_IMAGE_KEY,position);
+        bundle.putParcelable(ALBUM_KEY, mAlbum);
+        bundle.putInt(INDEX_SELECTED_IMAGE_KEY, position);
         intent.putExtras(bundle);
         startActivity(intent);
     }
 
     @Override
     public void onClickRemovePicture(int position) {
-        Boolean isNew = TextUtils.isEmpty(mAlbum !=null?mAlbum.key:"");
+        Boolean isNew = TextUtils.isEmpty(mAlbum != null ? mAlbum.key : "");
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user!=null) {
+        if (user != null) {
             DatabaseReference reference = FirebaseInstance.getDatabase().getReference(ALBUMS_DATABASE_REFERENCE_KEY);
             mThumbnailRecyclerAdapter.removeUrl(position);
-            if (!isNew){
+            if (!isNew) {
                 ActionBar actionBar = getSupportActionBar();
                 assert actionBar != null;
                 String title = actionBar.getTitle().toString();
-                Album album = mThumbnailRecyclerAdapter.getAlbumObject(title,mAlbum.key);
+                Album album = mThumbnailRecyclerAdapter.getAlbumObject(title, mAlbum.key);
                 reference.child(user.getUid()).child(mAlbum.key).setValue(album);
-                mAlbum=album;
+                mAlbum = album;
             }
         }
     }

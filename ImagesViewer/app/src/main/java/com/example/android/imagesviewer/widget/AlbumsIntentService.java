@@ -21,6 +21,12 @@ public class AlbumsIntentService extends IntentService {
         super("AlbumsIntentService");
     }
 
+    public static void startActionUpdateAlbumsWidgets(Context context) {
+        Intent intent = new Intent(context, AlbumsIntentService.class);
+        intent.setAction(ACTION_UPDATE_ALBUMS_WIDGETS);
+        context.startService(intent);
+    }
+
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         if (intent != null) {
@@ -38,11 +44,5 @@ public class AlbumsIntentService extends IntentService {
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_grid_view);
         //Now update all widgets
         AlbumAppWidget.updateAlbumsWidgets(AlbumsIntentService.this, appWidgetManager, appWidgetIds);
-    }
-
-    public static void startActionUpdateAlbumsWidgets(Context context) {
-        Intent intent = new Intent(context, AlbumsIntentService.class);
-        intent.setAction(ACTION_UPDATE_ALBUMS_WIDGETS);
-        context.startService(intent);
     }
 }

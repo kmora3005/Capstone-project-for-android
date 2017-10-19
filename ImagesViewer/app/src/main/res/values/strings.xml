@@ -32,6 +32,8 @@
     <string name="save">Save</string>
     <string name="next">Next</string>
     <string name="remove_item">Remove item</string>
+    <string name="edit_album">Edit album</string>
+    <string name="new_album">New album</string>
     <string name="logo">Logo</string>
     <string name="fullscreen_image">Fullscreen image</string>
 
@@ -51,4 +53,5 @@
     <string name="pref_enable_automatic_viewer_key">enable_automatic_viewer_key</string>
     <string name="pref_enable_automatic_viewer_label">Enable automatic viewer</string>
     <string name="action_settings">Settings</string>
+
 </resources>

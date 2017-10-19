@@ -28,66 +28,58 @@ public class ThumbnailRecyclerAdapter extends RecyclerView.Adapter<ThumbnailRecy
     private ArrayList<Integer> mSelectedImagesIndices;
 
     public ThumbnailRecyclerAdapter(Context context, ThumbnailAdapterOnClickHandler clickHandler, ArrayList<String> urls) {
-        mContext =context;
-        mClickHandler=clickHandler;
+        mContext = context;
+        mClickHandler = clickHandler;
         mImagesUrls = urls;
-        mSelectedImagesIndices =new ArrayList<>();
-    }
-    public ThumbnailRecyclerAdapter(Context context, ThumbnailAdapterOnClickHandler clickHandler, ArrayList<String> urls, ArrayList<Integer> indices) {
-        this(context,clickHandler,urls);
-        mSelectedImagesIndices =indices;
+        mSelectedImagesIndices = new ArrayList<>();
     }
 
-    public ArrayList<Integer> getSelectedIndices()
-    {
+    public ThumbnailRecyclerAdapter(Context context, ThumbnailAdapterOnClickHandler clickHandler, ArrayList<String> urls, ArrayList<Integer> indices) {
+        this(context, clickHandler, urls);
+        mSelectedImagesIndices = indices;
+    }
+
+    public ArrayList<Integer> getSelectedIndices() {
         return mSelectedImagesIndices;
     }
 
-    public ArrayList<String> getUrls()
-    {
+    public ArrayList<String> getUrls() {
         return mImagesUrls;
     }
 
-    public Album getAlbumObject(String title, String key)
-    {
-        return new Album(title, mImagesUrls, key);
-    }
-
-    public void setUrls(ArrayList<String> urls)
-    {
-        mImagesUrls =urls;
+    public void setUrls(ArrayList<String> urls) {
+        mImagesUrls = urls;
         notifyDataSetChanged();
     }
 
-    public void removeUrl(int pos)
-    {
+    public Album getAlbumObject(String title, String key) {
+        return new Album(title, mImagesUrls, key);
+    }
+
+    public void removeUrl(int pos) {
         mImagesUrls.remove(pos);
         notifyDataSetChanged();
     }
 
-    public void setSelectedIndex(int pos)
-    {
-        if (mSelectedImagesIndices.contains(pos)){
+    public void setSelectedIndex(int pos) {
+        if (mSelectedImagesIndices.contains(pos)) {
             Iterator<Integer> iterator = mSelectedImagesIndices.iterator();
-            while(iterator.hasNext())
-            {
+            while (iterator.hasNext()) {
                 Integer positionToCompare = iterator.next();
-                if (positionToCompare.equals(pos))
-                {
+                if (positionToCompare.equals(pos)) {
                     iterator.remove();
                     break;
                 }
             }
-        }
-        else {
+        } else {
             mSelectedImagesIndices.add(pos);
         }
         notifyDataSetChanged();
     }
 
-    public ArrayList<String> getSelectedUrls( ) {
-        ArrayList<String> listData=new ArrayList<>();
-        for (int index: mSelectedImagesIndices){
+    public ArrayList<String> getSelectedUrls() {
+        ArrayList<String> listData = new ArrayList<>();
+        for (int index : mSelectedImagesIndices) {
             listData.add(mImagesUrls.get(index));
         }
         return listData;
@@ -102,25 +94,22 @@ public class ThumbnailRecyclerAdapter extends RecyclerView.Adapter<ThumbnailRecy
 
     @Override
     public void onBindViewHolder(ThumbnailViewHolder holder, int position) {
-        String mThumbnailUrl= mImagesUrls.get(position);
+        String mThumbnailUrl = mImagesUrls.get(position);
         if (holder.ivThumbnailPicture != null) {
             Picasso.with(mContext).load(mThumbnailUrl).placeholder(R.drawable.ic_photo_black_24dp)
                     .into(holder.ivThumbnailPicture, new ImageLoadedCallback(holder.pbLoadingImage) {
-                @Override
-                public void onSuccess() {
-                    if (this.progressBar != null) {
-                        this.progressBar.setVisibility(View.GONE);
-                    }
-                }
-            });
+                        @Override
+                        public void onSuccess() {
+                            if (this.progressBar != null) {
+                                this.progressBar.setVisibility(View.GONE);
+                            }
+                        }
+                    });
         }
 
-        if( mSelectedImagesIndices.contains(position) )
-        {
+        if (mSelectedImagesIndices.contains(position)) {
             holder.ivCheckIcon.setVisibility(View.VISIBLE);
-        }
-        else
-        {
+        } else {
             holder.ivCheckIcon.setVisibility(View.INVISIBLE);
         }
     }
@@ -137,10 +126,11 @@ public class ThumbnailRecyclerAdapter extends RecyclerView.Adapter<ThumbnailRecy
 
     public interface ThumbnailAdapterOnClickHandler {
         void onClickPicture(int position);
+
         void onClickRemovePicture(int position);
     }
 
-    class ThumbnailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
+    class ThumbnailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         public final ImageView ivThumbnailPicture;
         public final ImageView ivRemoveIcon;
         public final ImageView ivCheckIcon;
@@ -151,7 +141,7 @@ public class ThumbnailRecyclerAdapter extends RecyclerView.Adapter<ThumbnailRecy
             ivThumbnailPicture = itemView.findViewById(R.id.iv_thumbnail);
             ivRemoveIcon = itemView.findViewById(R.id.iv_remove);
             ivCheckIcon = itemView.findViewById(R.id.iv_check);
-            pbLoadingImage= itemView.findViewById(R.id.pb_loading_image);
+            pbLoadingImage = itemView.findViewById(R.id.pb_loading_image);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

@@ -41,15 +41,15 @@ public class AlbumsGridWidgetService extends RemoteViewsService {
 class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     private static final String TAG = GridRemoteViewsFactory.class.getSimpleName();
     private final Context mContext;
-    private ArrayList<Album> mAlbums=new ArrayList<>();
+    private ArrayList<Album> mAlbums = new ArrayList<>();
     private CountDownLatch mCountDownLatch;
 
     public GridRemoteViewsFactory(Context applicationContext) {
         mContext = applicationContext;
     }
 
-    private void populateGrid(){
-        mAlbums=new ArrayList<>();
+    private void populateGrid() {
+        mAlbums = new ArrayList<>();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             DatabaseReference reference = FirebaseInstance.getDatabase().getReference(ALBUMS_DATABASE_REFERENCE_KEY);
@@ -57,10 +57,10 @@ class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
             childRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Album album = ds.getValue(Album.class);
                         if (album != null) {
-                            album.key=ds.getKey();
+                            album.key = ds.getKey();
                             mAlbums.add(album);
                             Log.d(TAG, "Album added: " + album.title);
                         }
@@ -113,14 +113,14 @@ class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     @Override
     public RemoteViews getViewAt(int i) {
         RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.item_album_widget);
-        Album album=mAlbums.get(i);
+        Album album = mAlbums.get(i);
         Uri uri = Uri.parse(album.getUrls().get(0));
-        views.setImageViewUri(R.id.iv_widget_thumbnail,uri);
-        views.setTextViewText(R.id.tv_album_name,album.title);
+        views.setImageViewUri(R.id.iv_widget_thumbnail, uri);
+        views.setTextViewText(R.id.tv_album_name, album.title);
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ALBUM_KEY,album);
-        bundle.putBoolean(IS_NEW_ALBUM_KEY,false);
+        bundle.putParcelable(ALBUM_KEY, album);
+        bundle.putBoolean(IS_NEW_ALBUM_KEY, false);
 
         Intent fillInIntent = new Intent();
         fillInIntent.putExtras(bundle);

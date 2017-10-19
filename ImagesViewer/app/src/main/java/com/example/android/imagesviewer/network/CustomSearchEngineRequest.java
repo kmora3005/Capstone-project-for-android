@@ -53,7 +53,13 @@ public class CustomSearchEngineRequest {
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, error.getMessage());
+                if (error==null){
+                    Log.e(TAG, "Unexpected error for volley");
+                }
+                else{
+                    Log.e(TAG, error.getMessage());
+                }
+
             }
         };
     }

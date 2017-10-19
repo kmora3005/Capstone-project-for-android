@@ -8,10 +8,11 @@
 
     <TextView
         android:id="@+id/tv_no_albums_message"
-        android:text="@string/empty_view_text"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/empty_view_text" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_albums"
         android:layout_width="match_parent"
@@ -24,7 +25,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_layout_margin"
         android:onClick="onClickNewAlbum"
-        app:srcCompat="@drawable/ic_add_black_24dp"
+        android:contentDescription="@string/new_album"
         app:elevation="@dimen/fab_elevation"
-    />
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 </merge>

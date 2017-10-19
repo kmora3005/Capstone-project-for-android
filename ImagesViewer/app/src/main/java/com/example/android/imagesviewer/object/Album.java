@@ -14,33 +14,6 @@ import java.util.List;
  */
 
 public class Album implements Parcelable {
-    public String title;
-    @Exclude public String key;
-    public List<AlbumImage> images;
-
-    public Album(){
-        images = new ArrayList<>();
-    }
-
-    public Album(String title, ArrayList<String> urls){
-        this();
-        this.title=title;
-        for (String url:urls){
-            AlbumImage albumImage= new AlbumImage(url);
-            images.add(albumImage);
-        }
-    }
-    public Album(String title, ArrayList<String> urls, String key) {
-        this(title,urls);
-        this.key=key;
-    }
-
-    protected Album(Parcel in) {
-        title = in.readString();
-        key = in.readString();
-        images = in.createTypedArrayList(AlbumImage.CREATOR);
-    }
-
     public static final Creator<Album> CREATOR = new Creator<Album>() {
         @Override
         public Album createFromParcel(Parcel in) {
@@ -52,11 +25,39 @@ public class Album implements Parcelable {
             return new Album[size];
         }
     };
+    public String title;
+    @Exclude
+    public String key;
+    public List<AlbumImage> images;
+
+    public Album() {
+        images = new ArrayList<>();
+    }
+
+    public Album(String title, ArrayList<String> urls) {
+        this();
+        this.title = title;
+        for (String url : urls) {
+            AlbumImage albumImage = new AlbumImage(url);
+            images.add(albumImage);
+        }
+    }
+
+    public Album(String title, ArrayList<String> urls, String key) {
+        this(title, urls);
+        this.key = key;
+    }
+
+    protected Album(Parcel in) {
+        title = in.readString();
+        key = in.readString();
+        images = in.createTypedArrayList(AlbumImage.CREATOR);
+    }
 
     @Exclude
-    public ArrayList<String> getUrls(){
+    public ArrayList<String> getUrls() {
         ArrayList<String> urls = new ArrayList<>();
-        for (AlbumImage imageAlbum:images){
+        for (AlbumImage imageAlbum : images) {
             urls.add(imageAlbum.url);
         }
         return urls;

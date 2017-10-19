@@ -12,7 +12,7 @@ import com.squareup.picasso.Callback;
 public class ImageLoadedCallback implements Callback {
     public final ProgressBar progressBar;
 
-    public  ImageLoadedCallback(ProgressBar progressBar){
+    public ImageLoadedCallback(ProgressBar progressBar) {
         this.progressBar = progressBar;
     }
 

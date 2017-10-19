@@ -1,12 +1,13 @@
 package com.example.android.imagesviewer.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +30,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
+
 import static com.example.android.imagesviewer.utils.Constants.ALBUMS_DATABASE_REFERENCE_KEY;
 import static com.example.android.imagesviewer.utils.Constants.ALBUM_KEY;
 import static com.example.android.imagesviewer.utils.Constants.IS_NEW_ALBUM_KEY;
@@ -38,7 +40,7 @@ public class UserAlbumsActivity extends AppCompatActivity implements AlbumRecycl
     private static final String TAG = UserAlbumsActivity.class.getSimpleName();
 
     private RecyclerView mAlbumRecyclerView;
-    private LinearLayoutManager mLayoutManager;
+    private StaggeredGridLayoutManager mLayoutManager;
     private AlbumRecyclerAdapter mAlbumAdapter;
     private TextView mNoAlbumsTextView;
 
@@ -50,8 +52,8 @@ public class UserAlbumsActivity extends AppCompatActivity implements AlbumRecycl
         mNoAlbumsTextView = findViewById(R.id.tv_no_albums_message);
         mAlbumRecyclerView = findViewById(R.id.rv_albums);
         mAlbumRecyclerView.setHasFixedSize(true);
-        int numColumns=numberOfColumns(this);
-        mLayoutManager = new GridLayoutManager(this, numColumns);
+        int numColumns = numberOfColumns(this);
+        mLayoutManager = new StaggeredGridLayoutManager(numColumns,StaggeredGridLayoutManager.VERTICAL);
 
         updateFromFirebase();
         AlbumsIntentService.startActionUpdateAlbumsWidgets(UserAlbumsActivity.this);
@@ -63,7 +65,7 @@ public class UserAlbumsActivity extends AppCompatActivity implements AlbumRecycl
         updateFromFirebase();
     }
 
-    private void updateFromFirebase(){
+    private void updateFromFirebase() {
         mAlbumAdapter = new AlbumRecyclerAdapter(this, this);
         mAlbumRecyclerView.setLayoutManager(mLayoutManager);
         mAlbumRecyclerView.setAdapter(mAlbumAdapter);
@@ -79,7 +81,7 @@ public class UserAlbumsActivity extends AppCompatActivity implements AlbumRecycl
                 public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                     Album album = dataSnapshot.getValue(Album.class);
                     if (album != null) {
-                        album.key=dataSnapshot.getKey();
+                        album.key = dataSnapshot.getKey();
                         mAlbumAdapter.addAlbum(album);
                         mNoAlbumsTextView.setVisibility(View.INVISIBLE);
                         Log.d(TAG, "Album added: " + album.title);
@@ -98,7 +100,7 @@ public class UserAlbumsActivity extends AppCompatActivity implements AlbumRecycl
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
                     Album album = dataSnapshot.getValue(Album.class);
                     if (album != null) {
-                        album.key=dataSnapshot.getKey();
+                        album.key = dataSnapshot.getKey();
                         mAlbumAdapter.removeAlbum(album);
                         Log.d(TAG, "Album removed: " + album.title);
                     }
@@ -142,8 +144,8 @@ public class UserAlbumsActivity extends AppCompatActivity implements AlbumRecycl
     public void onClickAlbum(Album album) {
         Intent intent = new Intent(this, AlbumDetailActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ALBUM_KEY,album);
-        bundle.putBoolean(IS_NEW_ALBUM_KEY,false);
+        bundle.putParcelable(ALBUM_KEY, album);
+        bundle.putBoolean(IS_NEW_ALBUM_KEY, false);
         intent.putExtras(bundle);
         startActivity(intent);
     }

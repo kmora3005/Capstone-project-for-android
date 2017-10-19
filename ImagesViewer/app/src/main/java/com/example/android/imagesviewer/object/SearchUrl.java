@@ -1,4 +1,3 @@
-
 package com.example.android.imagesviewer.object;
 
 import com.google.gson.annotations.Expose;

@@ -1,9 +1,9 @@
 package com.example.android.imagesviewer.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
 
 import com.example.android.imagesviewer.R;
